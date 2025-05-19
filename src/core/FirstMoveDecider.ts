@@ -1,5 +1,5 @@
 import { FairProtocol } from "../security/FairProtocol.js";
-import readline from 'readline-sync';
+import readline from "readline-sync";
 
 // This class is responsible for determining who makes the first move in the game.
 // It uses a fair protocol to ensure that both players have an equal chance of winning.
@@ -7,7 +7,6 @@ export class FirstMoveDecider {
   private readonly protocol: FairProtocol;
 
   constructor(private readonly range: number) {
-  
     this.protocol = new FairProtocol(2);
   }
 
@@ -23,7 +22,10 @@ export class FirstMoveDecider {
     console.log("? - help");
 
     const userInput = readline.question("Your selection: ");
-    if (userInput === "X") process.exit(0);
+    if (userInput === "x" || userInput === "X") {
+      console.log("Exiting the game.");
+      process.exit(0);
+    }
     if (userInput === "?") {
       console.log("The computer has selected 0 or 1. Try to guess it.");
       return this.start();
@@ -40,10 +42,10 @@ export class FirstMoveDecider {
     console.log(`My selection: ${value} (KEY=${key})`);
     // Check if the user guessed correctly
     if (guess === value) {
-      console.log("You guessed correctly. You move first.");
+      // The user guessed correctly, so they move first.
       return 1;
     } else {
-      console.log("I move first.");
+      // The user guessed incorrectly, so the computer moves first.
       return 0;
     }
   }
