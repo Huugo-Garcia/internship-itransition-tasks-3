@@ -5,6 +5,7 @@ export class DiceValidator {
     // Check if the user provided 3 dices
     if (diceInputs.length < 3) {
       console.log("❌ To start the game you need to provide 3 dices");
+      process.exit(0);
     }
 
     return diceInputs
@@ -18,6 +19,7 @@ export class DiceValidator {
                 index + 1
               } invalid: contains non-numeric or negative values: ${input}`
             );
+            process.exit(0);
           }
           return number;
         });
@@ -25,8 +27,11 @@ export class DiceValidator {
         // Check if the user provided a dice with 6 faces
         if (faces.length !== 6) {
           console.log(
-            `❌ Dice #${index + 1} invalid: must have exaclty 6 faces. Got ${faces.length} -> ${input}`
+            `❌ Dice #${index + 1} invalid: must have exaclty 6 faces. Got ${
+              faces.length
+            } -> ${input}`
           );
+          process.exit(0);
         }
 
         return new Dice(faces);
