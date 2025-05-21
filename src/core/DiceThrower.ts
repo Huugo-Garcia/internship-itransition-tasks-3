@@ -31,7 +31,7 @@ export class DiceThrower {
     }
 
     if (userInput === "?") {
-      console.log("Calculate probability of winning...");
+      console.log("The computer has selected 0..5. Select your number.");
       return this.launch();
     }
 
