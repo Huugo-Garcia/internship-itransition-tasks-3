@@ -199,7 +199,7 @@ npm start 1,2,3,4,7,9 2,2,2,4,9,9 3,4,5,6,0,2 0,0,9,9,2,7
 
 **Output:**
 
-```bash
+```markdown
 Let's determine who makes the first move
 I selected a random value in the range 0..1 (HMAC=34760b24f382d4d57e905b021ae458f2cf985c5052cbda566b85d9bbec37f6f0)
 Try to guess my selection.
