@@ -139,3 +139,127 @@ Below is an example of how the game interaction might look:
   - Explore efficient ways to calculate win probabilities and render user-friendly console tables.
 
   - By completing this task, you demonstrate proficiency in not only coding but also in reading and interpreting detailed technical requirements, modularizing code, and employing best practices.
+
+## 📦 Dependencies
+
+This project uses the following packages:
+
+| Package                                                                      | Purpose                                                              |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [`chalk`](https://www.npmjs.com/package/chalk)                               | Adds color and style to terminal output (used for better UX in CLI). |
+| [`cli-table3`](https://www.npmjs.com/package/cli-table3)                     | Renders nicely formatted ASCII tables (used in the help `?` view).   |
+| [`readline-sync`](https://www.npmjs.com/package/readline-sync)               | Provides synchronous prompts for user input in the terminal.         |
+| [`typescript`](https://www.npmjs.com/package/typescript)                     | Adds static typing to JavaScript — used to write scalable code.      |
+| [`ts-node`](https://www.npmjs.com/package/ts-node)                           | Allows running TypeScript files directly without compiling.          |
+| [`@types/readline-sync`](https://www.npmjs.com/package/@types/readline-sync) | Type definitions for `readline-sync`, required for TypeScript.       |
+
+All dependencies are installed via:
+
+```bash
+npm install
+```
+
+## 📂 Project Structure
+
+The codebase is organized using an object-oriented and modular architecture to separate responsibilities clearly. Here's an overview of the main directories and their purpose:
+
+```bash
+C:.
+│   main.ts                      # Entry point: initializes and runs the game
+│
+├───core/                        # Core game logic and user interaction flow
+│   ├── DiceSelector.ts          # Handles logic for user and computer dice selection
+│   ├── DiceThrower.ts           # Manages turn-based dice throwing for both players
+│   ├── FirstMoveDecider.ts      # Implements fair protocol to determine who plays first
+│   └── GameEngine.ts            # Central orchestrator that runs the full game loop
+│
+├───dice/                        # Dice representation and input validation
+│   ├── Dice.ts                  # Class representing a customizable dice
+│   └── DiceValidator.ts         # Validates and parses CLI dice configuration inputs
+│
+├───probability/                 # Probability tools for calculating and displaying odds
+│   └── ProbabilityTable.ts      # Generates winning probability tables between dice
+│
+└───security/                    # Cryptographic utilities for fair gameplay
+    ├── FairProtocol.ts          # Provably fair random number generation with HMAC
+    └── SecureRandomProvider.ts  # Generates cryptographically secure keys and numbers
+```
+
+Each module focuses on **single responsibility**, improving code readability, reusability, and testability. This modular architecture also allows for easier maintenance and potential extension of features (e.g., new protocols or UI layers).
+
+## 🚀 Usage Example
+
+### ✅ Example
+
+**Input:**
+
+```bash
+npm start 1,2,3,4,7,9 2,2,2,4,9,9 3,4,5,6,0,2 0,0,9,9,2,7
+```
+
+**Output:**
+
+```bash
+Let's determine who makes the first move
+I selected a random value in the range 0..1 (HMAC=34760b24f382d4d57e905b021ae458f2cf985c5052cbda566b85d9bbec37f6f0)
+Try to guess my selection.
+0 - 0
+1 - 1
+X - exit
+? - help
+Your selection: 1
+My selection: 1 (KEY=755bf71013f729bcaccc89258c83026587b77030aa0b8e9c9732ea0c0e2515c5)
+You make the first move
+Choose your dice:
+0 - 1,2,3,4,7,9
+1 - 2,2,2,4,9,9
+2 - 3,4,5,6,0,2
+3 - 0,0,9,9,2,7
+Your selection: 1
+You choose the [2,2,2,4,9,9] dice.
+I choose the [0,0,9,9,2,7] dice.
+It's time for your throw.
+I selected a random value in the range 0..5 (HMAC=a8f335a02cb87a3ccb3a56f74c32228641d7c6de3ec10d359cd305f3465cb300)
+Add your number modulo 6.
+0 - 0
+1 - 1
+2 - 2
+3 - 3
+4 - 4
+5 - 5
+X - exit
+? - help
+Your selection: 3
+The face value of the dice is: 4
+My number is: 0 (KEY=f3fc3edac355ea874dfa15b187bc9030ee5d683e38671a2b2903a60c3c739c68)
+Your number is: 3
+The result is 0 + 3 = 3 (mod 6)
+Your throw is 4.
+It's time for my throw.
+I selected a random value in the range 0..5 (HMAC=345df522fc4bb3e39b453e649a8f33f0c360eab623f2855b1e2b6c7050b1db12)
+Add your number modulo 6.
+0 - 0
+1 - 1
+2 - 2
+3 - 3
+4 - 4
+5 - 5
+X - exit
+? - help
+Your selection: 4
+The face value of the dice is: 0
+My number is: 3 (KEY=9b69649ecaf8aa23e4b0f28f023de52c9da8f66511c3b938492cae9267814dbb)
+Your number is: 4
+The result is 3 + 4 = 1 (mod 6)
+My throw is 0.
+You win! (4 > 0)
+```
+
+## 🧑‍💻 Author
+
+Developed by Hugo García
+As part of the Frontend Developer Internship at Itransition
+
+## 📄 License
+
+This project is intended for educational purposes only and is part of an internship assignment.
