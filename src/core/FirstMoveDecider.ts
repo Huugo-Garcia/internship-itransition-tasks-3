@@ -1,12 +1,16 @@
 import { FairProtocol } from "../security/FairProtocol.js";
 import readline from "readline-sync";
+import { ProbabilityTable } from "../probability/ProbabilityTable.js";
 
 // This class is responsible for determining who makes the first move in the game.
 // It uses a fair protocol to ensure that both players have an equal chance of winning.
 export class FirstMoveDecider {
   private readonly protocol: FairProtocol;
 
-  constructor(private readonly range: number) {
+  constructor(
+    private readonly range: number,
+    private readonly probabilityTable?: ProbabilityTable
+  ) {
     this.protocol = new FairProtocol(2);
   }
 
@@ -28,6 +32,10 @@ export class FirstMoveDecider {
     }
     if (userInput === "?") {
       console.log("The computer has selected 0 or 1. Try to guess it.");
+      if (this.probabilityTable) {
+        console.log("Probability to win for each dice:");
+        this.probabilityTable.display();
+      }
       return this.start();
     }
 

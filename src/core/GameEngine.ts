@@ -2,6 +2,7 @@ import { FirstMoveDecider } from "./FirstMoveDecider.js";
 import { DiceSelector } from "./DiceSelector.js";
 import { DiceValidator } from "../dice/DiceValidator.js";
 import { DiceThrower } from "./DiceThrower.js";
+import { ProbabilityTable } from "../probability/ProbabilityTable.js";
 
 export class GameEngine {
   private readonly decider: FirstMoveDecider;
@@ -10,8 +11,8 @@ export class GameEngine {
   constructor(private readonly rawArgs: string[]) {
     const diceValidator = new DiceValidator();
     const validatedDices = diceValidator.validate(this.rawArgs);
-
-    this.decider = new FirstMoveDecider(2);
+    const table = new ProbabilityTable(validatedDices);
+    this.decider = new FirstMoveDecider(2, table);
     this.diceSelector = new DiceSelector(validatedDices);
   }
 
